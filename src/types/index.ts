@@ -24,12 +24,26 @@ export interface Ingredient extends BaseType {
   weight_grams?: number;
 }
 
+export interface User{
+    id: number;
+    email: string;
+    name?: string;
+    role: string;
+}
+
+export interface Recipe{
+    id: number;
+    userId: number;
+    name: string;
+    bowlId: number;
+    IngredientIds: number[];
+    slots?: Record<string, Ingredient | null>;
+    is_public?: boolean;
+}
 
 export interface PriceListItem {
   id: number;
   item_id: number;
   price: number;
-  type?: string;  // optional
+  type?: string;
 }
-
-
