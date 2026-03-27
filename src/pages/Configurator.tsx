@@ -1,8 +1,9 @@
-import { BowlSelection } from '../components/BowlSelection';
-import { BaseSelection } from '../components/BaseSelection';
-import { CenterBowl } from '../components/CenterBowl';
-import { IngredientSection } from '../components/IngredientSection';
-import { SummaryBar } from '../components/SummaryBar';
+import   BowlSelection  from "../components/BowlSelection";
+import   CenterBowl  from "../components/CenterBowl";  
+import { BaseSelection } from "../components/BaseSelection";
+import   IngredientSection  from "../components/IngredientSection";
+import { SummaryBar } from "../components/SummaryBar";
+
 
 export function Configurator() {
   return (
