@@ -5,25 +5,42 @@ import { BaseSelection } from "../components/BaseSelection";
 import   IngredientSection  from "../components/IngredientSection";
 import { SummaryBar } from "../components/SummaryBar";
 import type { Bowl, Category, Ingredient } from "../types";
-import { getBowls } from "../services/api";
+import { getBowls, getCategories } from "../services/api";
 
 export default function Configurator() {
   const [bowls, setBowls] = useState<Bowl[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  
+  
   useEffect(() => {
-    async function loadBowls() {
+    async function loadData() {
       try {
+  setIsLoading(true);
+
         const data = await getBowls();
         setBowls(data);
+     
+     const categoriesData = await getCategories();
+        setCategories(categoriesData);
+    
       } catch (error) {
         console.error("Failed to load bowls", error);
+        setError("Failed to load data");
+      }finally {
+        setIsLoading(false);
       }
     }
 
-    loadBowls();
+    loadData();
   }, []);
+
+
+    if (isLoading) return <p className="p-8">Loading...</p>;
+    if (error) return <p className="p-8 text-red-500">{error}</p>;
 
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto p-6 flex flex-col gap-8 mt-4">
