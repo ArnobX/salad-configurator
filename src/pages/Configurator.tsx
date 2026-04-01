@@ -39,8 +39,8 @@ export default function Configurator() {
   }, []);
 
 
-    if (isLoading) return <p className="p-8">Loading...</p>;
-    if (error) return <p className="p-8 text-red-500">{error}</p>;
+    if (isLoading) return <p className="">Loading...</p>;
+    if (error) return <p className="">{error}</p>;
 
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto p-6 flex flex-col gap-8 mt-4">
