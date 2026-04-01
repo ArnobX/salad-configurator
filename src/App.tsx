@@ -1,10 +1,9 @@
 import Header from "./components/Header";
 import { Footer } from "./components/Footer";
-import   BowlSelection  from "./components/BowlSelection";
-import   CenterBowl  from "./components/CenterBowl";  
-import { BaseSelection } from "./components/BaseSelection";
-import   IngredientSection  from "./components/IngredientSection";
-import { SummaryBar } from "./components/SummaryBar";
+import { Routes, Route } from "react-router-dom";
+import Configurator from "./pages/Configurator";
+import { Community } from "./pages/Community";
+import { Print } from "./pages/print";
 
 function App() {
   return (
@@ -13,15 +12,11 @@ function App() {
       <Header />
 
       <main className="flex-1 max-w-6xl w-full mx-auto p-6 flex flex-col gap-8 mt-4">
-        <div className="flex flex-col lg:flex-row gap-6 justify-between items-stretch">
-          <BowlSelection />
-          <CenterBowl />
-          <BaseSelection />
-          
-          
-        </div>
-        <IngredientSection />
-        <SummaryBar />
+        <Routes>
+          <Route path="/" element={<Configurator />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/print" element={<Print />} />
+        </Routes>
       </main>
 
       <Footer />
