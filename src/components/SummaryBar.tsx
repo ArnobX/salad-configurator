@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export function SummaryBar() {
   return (
     <div className="bg-zinc-800 rounded-[3rem] p-8 text-white w-full flex flex-col md:flex-row gap-8 shadow-xl">
@@ -29,7 +30,7 @@ export function SummaryBar() {
             0,00 €
           </div>
         </div>
-
+<Link to="/print">Print</Link>
       </div>
     </div>
   );
