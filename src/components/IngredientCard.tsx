@@ -12,8 +12,8 @@ const dietLabels: Record<"G" | "L" | "V", string> = {
 
 const dietColors: Record<"G" | "L" | "V", string> = {
   G: "#4CAF50",
-  L: "#4CAF50",
-  V: "#4CAF50",
+  L: "#FFC107",
+  V: "#2196F3",
 };
 
 export default function IngredientCard({ ingredient }: Props) {

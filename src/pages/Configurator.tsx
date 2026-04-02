@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import   BowlSelection  from "../components/BowlSelection";
-import   CenterBowl  from "../components/CenterBowl";  
+import BowlSelection from "../components/BowlSelection";
+import CenterBowl from "../components/CenterBowl";  
 import { BaseSelection } from "../components/BaseSelection";
-import   IngredientSection  from "../components/IngredientSection";
+import IngredientSection from "../components/IngredientSection";
 import { SummaryBar } from "../components/SummaryBar";
 import type { Bowl, Category, Ingredient } from "../types";
-import { getBowls } from "../services/api";
-import { getIngredients } from '../services/api';
-import { getCategories } from '../services/api';
+import { getBowls, getIngredients, getCategories } from "../services/api";
 
 export default function Configurator() {
   const [bowls, setBowls] = useState<Bowl[]>([]);
@@ -15,38 +13,24 @@ export default function Configurator() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
   useEffect(() => {
-    async function loadBowls() {
+    async function loadData() {
       try {
-        const data = await getBowls();
-        setBowls(data);
+        const [bowlsData, ingredientsData, categoriesData] = await Promise.all([
+          getBowls(),
+          getIngredients(),
+          getCategories(),
+        ]);
+
+        setBowls(bowlsData);
+        setIngredients(ingredientsData);
+        setCategories(categoriesData);
       } catch (error) {
-        console.error("Failed to load bowls", error);
+        console.error("Failed to load data", error);
       }
     }
 
-    loadBowls();
-
-    async function loadIngredients() {
-      try {
-        const data = await getIngredients();
-        setIngredients(data);
-      } catch (error) {
-        console.error("Failed to load ingredients", error);
-      }
-    }
-    loadIngredients();
-
-    async function loadCategories(){
-      try {
-        const data = await getCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error("Failed to load categories", error);
-      }
-    }
-    loadCategories();
+    loadData();
   }, []);
-
 
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto p-6 flex flex-col gap-8 mt-4">
@@ -55,7 +39,10 @@ export default function Configurator() {
         <CenterBowl />
         <BaseSelection ingredients={ingredients} />
       </div>
-      <IngredientSection />
+
+      
+      <IngredientSection categories={categories} ingredients={ingredients} />
+
       <SummaryBar />
     </main>
   );
