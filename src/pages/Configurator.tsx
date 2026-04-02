@@ -7,6 +7,7 @@ import { SummaryBar } from "../components/SummaryBar";
 import type { Bowl, Category, Ingredient } from "../types";
 import { getBowls } from "../services/api";
 import { getIngredients } from '../services/api';
+import { getCategories } from '../services/api';
 
 export default function Configurator() {
   const [bowls, setBowls] = useState<Bowl[]>([]);
@@ -34,6 +35,16 @@ export default function Configurator() {
       }
     }
     loadIngredients();
+
+    async function loadCategories(){
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to load categories", error);
+      }
+    }
+    loadCategories();
   }, []);
 
 
