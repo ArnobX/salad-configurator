@@ -8,7 +8,7 @@ export async function getBowls(){
     return res.json();
 }
 
-export async function getCatagories() {
+export async function getCategories() {
     const res = await fetch(`${BASE_URL}/categories`);
     if(!res.ok){
         throw new Error ("Failed to fetch categories");
