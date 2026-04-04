@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import   BowlSelection  from "../components/BowlSelection";
 import   CenterBowl  from "../components/CenterBowl";  
 import { BaseSelection } from "../components/BaseSelection";
@@ -55,7 +55,7 @@ export default function Configurator() {
         <CenterBowl />
         <BaseSelection ingredients={ingredients} />
       </div>
-      <IngredientSection />
+      <IngredientSection categories={categories} ingredients={ingredients} />
       <SummaryBar />
     </main>
   );
