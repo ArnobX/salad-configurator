@@ -18,18 +18,30 @@ const dietColors: Record<"G" | "L" | "V", string> = {
 
 export default function IngredientCard({ ingredient }: Props) {
   return (
-    <div className="w-40 h-40 rounded-3xl border border-zinc-200 bg-white p-4 flex flex-col justify-between shadow-sm transition-transform duration-150 hover:-translate-y-1 hover:shadow-md">
-      <div className="flex-1 flex items-center justify-center">
-        <h3 className="text-base font-semibold text-zinc-900 text-center">{ingredient.name}</h3>
+    <div className="w-36 rounded-3xl border border-zinc-200 bg-white p-3 flex flex-col justify-between shadow-sm transition-transform duration-150 hover:-translate-y-1 hover:shadow-md">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="h-12 w-12 rounded-2xl bg-zinc-100 overflow-hidden flex items-center justify-center shrink-0">
+          {ingredient.image_url ? (
+            <img
+              src={ingredient.image_url}
+              alt={ingredient.name}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span className="text-[10px] text-zinc-400">No image</span>
+          )}
+        </div>
+
+        <h3 className="text-sm font-semibold text-zinc-900 leading-tight">{ingredient.name}</h3>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2 justify-center">
+      <div className="mt-2 flex flex-wrap gap-1 justify-center">
         {ingredient.diets
           .filter((diet): diet is keyof typeof dietLabels => diet in dietLabels)
           .map((diet) => (
             <span
               key={diet}
-              className="rounded-full px-2 py-1 text-[11px] font-semibold text-white"
+              className="rounded-full px-2 py-1 text-[10px] font-semibold text-white"
               style={{ backgroundColor: dietColors[diet] }}
             >
               {dietLabels[diet]}

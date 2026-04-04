@@ -1,35 +1,59 @@
+import type { Category, Ingredient } from "../types";
+import { useFilter } from "../types/useFilter";
 import IngredientCard from "./IngredientCard";
-import type { Ingredient, Category } from "../types";
 
 interface Props {
   categories: Category[];
   ingredients: Ingredient[];
 }
 
-export default function IngredientSection({ categories, ingredients }: Props) {
-  const filteredCategories = categories.filter((cat) => cat.id !== 6);
-  const filteredIngredients = ingredients.filter((item) => item.categoryId !== 6);
+export default function IngredientSection({
+  categories,
+  ingredients,
+}: Props) {
+  const {
+    filteredCategories,
+    filteredIngredients,
+    activeCategory,
+    selectCategory,
+  } = useFilter(categories, ingredients);
 
   return (
-    <div>
-      {/* 🔘 Category Buttons */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {filteredCategories.map((cat) => (
+    <section className="bg-zinc-800 rounded-[3rem] p-8 text-white w-full shadow-lg">
+      
+      <input
+        type="text"
+        placeholder="Etsi tuotteita"
+        className="rounded-full px-6 py-3 text-black w-64 outline-none mb-6"
+      />
+
+      {/* Filter buttons*/}
+      <div className="flex flex-wrap gap-4 mb-6">
+        {filteredCategories.map((category) => (
           <button
-            key={cat.id}
-            className="px-4 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-100 transition"
+            key={category.id}
+            onClick={() => selectCategory(category.id)}
+            className={`px-6 py-2 rounded-full font-bold transition
+              ${
+                activeCategory === category.id
+                  ? "bg-green-500 text-black"
+                  : "bg-[#A2D135] text-black opacity-70"
+              }`}
           >
-            {cat.name}
+            {category.name}
           </button>
         ))}
       </div>
 
-      {/* 🧱 Ingredient Grid */}
-      <div className="flex flex-wrap gap-4">
-        {filteredIngredients.map((item) => (
-          <IngredientCard key={item.id} ingredient={item} />
+      {/* INGREDIENT LIST */}
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        {filteredIngredients.map((ingredient) => (
+          <IngredientCard
+            key={ingredient.id}
+            ingredient={ingredient}
+          />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
