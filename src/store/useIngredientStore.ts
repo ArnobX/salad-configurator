@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Bowl, Ingredient } from "../../types";
+import type { Bowl, Ingredient } from "../types";
 interface IngredientStore {
   slots: Record<string, Ingredient | null>;
   baseType: number;
