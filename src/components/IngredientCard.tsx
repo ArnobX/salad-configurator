@@ -1,4 +1,5 @@
 import type { Ingredient } from "../types";
+import { useIngredientStore } from "./store/useIngredientStore"
 
 interface Props {
   ingredient: Ingredient;
@@ -17,7 +18,11 @@ const dietColors: Record<"G" | "L" | "V", string> = {
 };
 
 export default function IngredientCard({ ingredient }: Props) {
+  const addIngredient = useIngredientStore((state) => state.addIngredient);
   return (
+    <button
+    onClick={() => addIngredient(ingredient)}
+    >
     <div className="w-36 rounded-3xl border border-zinc-200 bg-white p-3 flex flex-col justify-between shadow-sm transition-transform duration-150 hover:-translate-y-1 hover:shadow-md">
       <div className="flex items-center gap-3 mb-3">
         <div className="h-12 w-12 rounded-2xl bg-zinc-100 overflow-hidden flex items-center justify-center shrink-0">
@@ -49,5 +54,6 @@ export default function IngredientCard({ ingredient }: Props) {
           ))}
       </div>
     </div>
+    </button>
   );
 }
