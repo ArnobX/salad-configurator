@@ -32,7 +32,7 @@ export default function IngredientCard({ ingredient }: Props) {
           )}
         </div>
 
-        <h3 className="text-sm font-semibold text-zinc-900 leading-tight">{ingredient.name}</h3>
+        <h3 className="text-sm font-semibold text-zinc-900 leading-tight break-words max-w-[calc(100%-3rem)]">{ingredient.name}</h3>
       </div>
 
       <div className="mt-2 flex flex-wrap gap-1 justify-center">
