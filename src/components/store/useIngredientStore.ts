@@ -30,5 +30,24 @@ export const useIngredientStore = create<IngredientStore>()((set) => ({
 
   addIngredient: (_item) => {},
 
-  removeIngredient: (_id) => {},
+ 
+  removeIngredient: (id) =>
+    set((state) => {
+
+      const newSlots = { ...state.slots };
+
+   
+      const keyToRemove = Object.keys(newSlots).find(
+        (key) => newSlots[key]?.id === id
+      );
+
+     
+      if (keyToRemove) {
+        newSlots[keyToRemove] = null;
+      }
+
+     
+  
+      return { slots: newSlots };
+    }),
 }));
