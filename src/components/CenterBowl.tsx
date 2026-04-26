@@ -1,6 +1,10 @@
 import React from "react";
+import { useIngredientStore } from "../store/useIngredientStore";
 
 const CenterBowl: React.FC = () => {
+
+  const selectedBowl = useIngredientStore((state) => state.selectedBowl);
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] mt-4 lg:mt-0">
 
@@ -17,14 +21,17 @@ const CenterBowl: React.FC = () => {
 
       {/* Big Bowl */}
       <div className="w-80 h-80 rounded-full border-[12px] border-gray-200 bg-gray-50 flex items-center justify-center shadow-inner relative">
-        
         <span className="text-gray-400">Bowl</span>
       </div>
 
       {/* Bottom Info */}
       <div className="mt-4 flex flex-col items-center gap-1 text-gray-700">
         <span>100 g / 1,99 €</span>
-        <span>500 ml</span>
+
+        {/* ✅ DYNAMIC VOLUME */}
+        <span>
+          {selectedBowl ? selectedBowl.volume : 0} ml
+        </span>
       </div>
 
     </div>
